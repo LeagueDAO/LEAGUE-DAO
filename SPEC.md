@@ -1,12 +1,12 @@
 ## Thresholds
 
-- **Create proposal**: 1% of ENTR staked in Kernel
-- **Minimum quorum**: 40% of ENTR staked in Kernel
+- **Create proposal**: 1% of LEAG staked in Kernel
+- **Minimum quorum**: 40% of LEAG staked in Kernel
 - **Minimum acceptance**: 60% of votes
 
 ## Proposals
 
-- User that holds enough vENTR can create a proposal
+- User that holds enough vLEAG can create a proposal
     - Proposal creator:
         - can vote on other proposals
         - can only have one active proposal at a time
@@ -24,7 +24,7 @@
 
 ![](diagrams/state.png)
 
-- after being created, proposal enters the **Warm-up** state for `WARMUP_PERIOD` to allow people to stake their ENTR
+- after being created, proposal enters the **Warm-up** state for `WARMUP_PERIOD` to allow people to stake their LEAG
     - if the creator's balance falls below the 1% threshold the proposal can be cancelled by calling a function
 - after **Warm-up**, any user can vote
     - `VOTING_PERIOD` starts immediately after `WARMUP_PERIOD`
@@ -40,7 +40,7 @@
 ## Cancellation Proposals
 
 - This is a special type of proposal, with the following thresholds:
-    - Acceptance criteria: 50% of staked ENTR
+    - Acceptance criteria: 50% of staked LEAG
 - Can be created only during the `QUEUE_PERIOD`
 - A proposal can only have one associated cancellation proposal at any given time
 - Anyone can vote on these proposals
@@ -54,7 +54,7 @@
 
 ## Voting
 
-- user can vote using his vENTR balance + delegated vENTR at the voting start timestamp/block
+- user can vote using his vLEAG balance + delegated vLEAG at the voting start timestamp/block
 - user can only be pro or against
 - user can cancel vote
 - user can change vote

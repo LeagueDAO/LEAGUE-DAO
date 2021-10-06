@@ -1,4 +1,4 @@
-# EnterDAO Governance contract
+# LeagueDAO Governance contract
 
 ## How it works
 Please see the [SPEC](./SPEC.md)
@@ -8,7 +8,7 @@ Please see the [SPEC](./SPEC.md)
 
 ### 1. Clone this repo
 ```shell
-git clone git@github.com:EnterDAO/ENTER-DAO.git
+git clone git@github.com:LeagueDAO/LEAGUE-DAO.git
 ```
 
 ### 2. Install dependencies
@@ -44,6 +44,6 @@ Governance deployed at:  0x820dB01Bf63f1CFCC0Cff60aE0a177d83678e633
 ```
 
 ## Audits
-Enter DAO is a fork of BarnBridge DAO. Here you can find the audits for the original contracts:
+League DAO is a fork of BarnBridge DAO. Here you can find the audits for the original contracts:
 - [QuantStamp](https://github.com/BarnBridge/BarnBridge-PM/blob/master/audits/Quantstamp-DAO.pdf)
 - [Haechi](https://github.com/BarnBridge/BarnBridge-PM/blob/master/audits/HAECHI-DAO.pdf)

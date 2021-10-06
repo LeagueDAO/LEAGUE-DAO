@@ -69,18 +69,18 @@ describe('Governance', function () {
         it('reverts if threshold not yet met', async function () {
             await expect(governance.activate()).to.be.revertedWith('Threshold not met yet');
 
-            await kernel.setEntrStaked(BigNumber.from(4_999_999).mul(helpers.tenPow18));
+            await kernel.setLeagStaked(BigNumber.from(4_999_999).mul(helpers.tenPow18));
             await expect(governance.activate()).to.be.revertedWith('Threshold not met yet');
         });
 
         it('activates if threshold is met', async function () {
-            await kernel.setEntrStaked(BigNumber.from(5_000_000).mul(helpers.tenPow18));
+            await kernel.setLeagStaked(BigNumber.from(5_000_000).mul(helpers.tenPow18));
             await expect(governance.activate()).to.not.be.reverted;
             expect(await governance.isActive()).to.be.true;
         });
 
         it('reverts if already activated', async function () {
-            await kernel.setEntrStaked(BigNumber.from(50_000_000).mul(helpers.tenPow18));
+            await kernel.setLeagStaked(BigNumber.from(50_000_000).mul(helpers.tenPow18));
             await governance.activate();
 
             await expect(governance.activate()).to.be.revertedWith('DAO already active');
@@ -89,13 +89,13 @@ describe('Governance', function () {
 
     describe('propose', function () {
         before(async function () {
-            await kernel.setEntrStaked(BigNumber.from(50_000_000).mul(helpers.tenPow18));
+            await kernel.setLeagStaked(BigNumber.from(50_000_000).mul(helpers.tenPow18));
             await governance.activate();
-            await kernel.setEntrStaked(0);
+            await kernel.setLeagStaked(0);
         });
 
         it('create new proposal revert reasons', async function () {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
 
             const targets = [helpers.ZERO_ADDRESS];
             const targetsMismatch = [helpers.ZERO_ADDRESS, helpers.ZERO_ADDRESS];
@@ -141,7 +141,7 @@ describe('Governance', function () {
         });
 
         it('create new proposal', async function () {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(10));
 
             const targets = [helpers.ZERO_ADDRESS];
@@ -170,7 +170,7 @@ describe('Governance', function () {
         });
 
         it('start vote && quorum', async function () {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(10));
 
             await createTestProposal();
@@ -188,7 +188,7 @@ describe('Governance', function () {
         });
 
         it('cast, cancel and change vote', async function () {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(10));
             await kernel.setVotingPower(await voter1.getAddress(), amount.div(10));
             await kernel.setVotingPower(await voter2.getAddress(), amount.div(10));
@@ -226,7 +226,7 @@ describe('Governance', function () {
         });
 
         it('castVote fails if user does not have voting power', async () => {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(10));
             await createTestProposal();
 
@@ -397,7 +397,7 @@ describe('Governance', function () {
         });
 
         it('fail for invalid quorum', async function () {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(2));
 
             const targets = [governance.address];
@@ -421,7 +421,7 @@ describe('Governance', function () {
         });
 
         it('fail for invalid minimum threshold', async function () {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(2));
             await kernel.setVotingPower(await voter1.getAddress(), amount.div(2));
 
@@ -461,7 +461,7 @@ describe('Governance', function () {
 
         it('test change periods', async function () {
             await expect(governance.setActiveDuration(1)).to.be.revertedWith('Only DAO can call');
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(2));
             const targets = [
                 governance.address,
@@ -964,7 +964,7 @@ describe('Governance', function () {
         });
 
         it('parameters changed mid-flight do not affect running proposals', async () => {
-            await kernel.setEntrStaked(amount);
+            await kernel.setLeagStaked(amount);
             await kernel.setVotingPower(userAddress, amount.div(2));
             await kernel.setVotingPower(await voter1.getAddress(), amount.div(2));
 
@@ -1117,7 +1117,7 @@ describe('Governance', function () {
     }
 
     async function setupEnv () {
-        await kernel.setEntrStaked(amount);
+        await kernel.setLeagStaked(amount);
         await kernel.setVotingPower(userAddress, amount.div(5));
         await kernel.setVotingPower(await voter1.getAddress(), amount.div(20));
         await kernel.setVotingPower(await voter2.getAddress(), amount.div(5));

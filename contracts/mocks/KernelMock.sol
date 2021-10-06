@@ -4,7 +4,7 @@ pragma solidity ^0.7.1;
 import "../interfaces/IKernel.sol";
 
 contract KernelMock {
-    uint256 private _entrStaked;
+    uint256 private _leagStaked;
     mapping(address => uint256) private _votingPowerAtTs;
     bool public lockCreatorBalanceHasBeenCalled;
     bool public withdrawHasBeenCalled;
@@ -18,16 +18,16 @@ contract KernelMock {
         return _votingPowerAtTs[user];
     }
 
-    function entrStaked() external view returns (uint256) {
-        return _entrStaked;
+    function leagStaked() external view returns (uint256) {
+        return _leagStaked;
     }
 
-    function entrStakedAtTs(uint256 ts) public view returns (uint256) {
-        return _entrStaked;
+    function leagStakedAtTs(uint256 ts) public view returns (uint256) {
+        return _leagStaked;
     }
 
-    function setEntrStaked(uint256 val) public {
-        _entrStaked = val;
+    function setLeagStaked(uint256 val) public {
+        _leagStaked = val;
     }
 
     function setVotingPower(address user, uint256 val) public {
